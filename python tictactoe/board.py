@@ -60,8 +60,7 @@ class Board:
             if (player & case) == case:
                 return GameState.WIN_O if self.turn else GameState.WIN_X;
 
-        board = self.o | self.x
-        if board == 0b111111111: 
+        if self.o | self.x == 0b111111111:
             return GameState.TIE;
 
         return GameState.WE_GOIN;
@@ -72,7 +71,7 @@ class Board:
         
         mask = (1 << (coord-1)); # the move
 
-        if ((self.o | self.x & mask) == mask):
+        if (((self.o | self.x) & mask) != 0):
             return GameState.INVALID;
         
         if self.turn:
